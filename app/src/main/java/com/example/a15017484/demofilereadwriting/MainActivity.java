@@ -1,5 +1,6 @@
 package com.example.a15017484.demofilereadwriting;
 
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import java.io.FileWriter;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv;
-    Button btnWrite, btnRead;
+    Button btnWrite, btnRead, btnStart, btnStop;
     String folderLocation;
 
     @Override
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         folderLocation = Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + "/Test";
+        btnStart = (Button) this.findViewById(R.id.btnStart);
+        btnStop = (Button) this.findViewById(R.id.btnStop);
         btnWrite = (Button) this.findViewById(R.id.btnWrite);
         btnRead = (Button) this.findViewById(R.id.btnRead);
         tv = (TextView) this.findViewById(R.id.tv);
@@ -83,6 +86,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, MyService.class);
+                startService(i);
+            }
+        });
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, MyService.class);
+                stopService(i);
+            }
+        });
+
 
     }
 }
